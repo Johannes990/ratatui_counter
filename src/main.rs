@@ -12,6 +12,10 @@ use ratatui::{
 use anyhow::Result;
 pub type Frame<'a> = ratatui::Frame<'a, CrosstermBackend<std::io::Stderr>>;
 
+struct App {
+    counter: i64,
+    should_quit: bool,
+}
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // startup: Enalbe raw mode for the terminal,  giving us fine control over
