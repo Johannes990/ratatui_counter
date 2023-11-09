@@ -9,6 +9,9 @@ use ratatui::{
     widgets::Paragraph,
 };
 
+use anyhow::Result;
+pub type Frame<'a> = ratatui::Frame<'a, CrosstermBackend<std::io::Stderr>>;
+
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // startup: Enalbe raw mode for the terminal,  giving us fine control over
