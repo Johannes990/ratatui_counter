@@ -1,7 +1,14 @@
+use crossterm::{
+    event::{self, Event::Key, KeyCode::Char},
+    execute,
+    terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
+};
+
 use ratatui::{
     prelude::{CrosstermBackend, Terminal},
     widgets::Paragraph,
 };
+
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // startup: Enalbe raw mode for the terminal,  giving us fine control over
