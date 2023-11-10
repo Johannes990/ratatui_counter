@@ -65,4 +65,13 @@ impl Tui {
         self.terminal.show_cursor()?;
         Ok(())
     }
+
+    /// 'Draw' the terminal interface by 'rendering' the widgets
+    /// 
+    /// 'Draw': tui::Terminal::draw
+    /// 'rendering': crate::ui::render
+    pub fn draw(&mut self, app: &mut App) -> Result<()> {
+        self.terminal.draw(|frame| ui::render(app, frame))?;
+        Ok(())
+    }
 }
