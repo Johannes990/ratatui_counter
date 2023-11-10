@@ -46,4 +46,23 @@ impl Tui {
         self.terminal.clear();
         Ok(())
     }
+
+    /// Reset the terminal interface
+    /// 
+    /// This function is also used for the panic hook to revert
+    /// the terminal properties it unexpected errors occur
+    pub fn reset() -> Result<()> {
+        terminal::disable_raw_mode()?;
+        crossterm::execute!(io::stderr(), LeaveAlternateScreen, DisableMouseCapture)?;
+        Ok(())
+    }
+
+    /// Exit the terminal interface
+    /// 
+    /// also disable the raw mode and revert back the terminal properties
+    pub fn exit(&mut self) -> Result<()> {
+        Self::reset()?;
+        self.terminal.show_cursor()?;
+        Ok(())
+    }
 }
