@@ -1,7 +1,7 @@
 use crossterm::{
     event::{self, Event::Key, KeyCode::Char},
     execute,
-    terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen}, ExecutableCommand,
+    terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
 
 use ratatui::{
@@ -10,7 +10,23 @@ use ratatui::{
 };
 
 use anyhow::Result;
-pub type Frame<'a> = ratatui::Frame<'a, CrosstermBackend<std::io::Stderr>>;
+pub type Frame<'a> = ratatui::Frame<'a>;
+
+/// declare our files as modules
+/// Application
+pub mod app;
+
+/// Terminal events handler
+pub mod event;
+
+/// Widget renderer
+pub mod ui;
+
+/// Terminal user interface
+pub mod tui;
+
+/// Application updater
+pub mod update;
 
 struct App {
     counter: i64,
@@ -35,7 +51,7 @@ fn ui(app: &App, f: &mut Frame<'_>) {
 }
 
 fn update(app: &mut App) ->  Result<()> {
-    if event::poll(std::time::Duration::from_millis(250))? {
+    if event::poll(std::time::Duration::from_millis(10000))? {
         if let Key(key) = event::read()? {
             if key.kind == event::KeyEventKind::Press {
                 match key.code {
@@ -79,6 +95,6 @@ fn main() -> Result<()> {
     startup()?;
     let result = run()?;
     shutdown()?;
-    result?;
+    result;
     Ok(())
 }
