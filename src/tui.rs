@@ -12,3 +12,11 @@ pub type CrosstermTerminal = ratatui::Terminal<ratatui::backend::CrosstermBacken
 use crate::{app::App, event::EventHandler, ui};
 
 
+/// Representation of the terminal user interface
+/// 
+/// It it responsible for setting up and handling the draw events
+/// intializing the interface and handling the draw events
+pub struct Tui {
+    terminal: CrosstermTerminal,
+    pub events: EventHandler,
+}
