@@ -15,10 +15,10 @@ pub enum Event {
 pub struct EventHandler {
     // Event sender channel
     #[allow(dead_code)]
-    sender: mspc::Sender<Event>,
+    sender: mpsc::Sender<Event>,
     
     // Event receiver channel
-    receiver: mspc::Receiver<Event>,
+    receiver: mpsc::Receiver<Event>,
 
     // event handler thread
     handler: thread::JoinHandle<()>,
